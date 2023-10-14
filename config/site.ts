@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Next.js + NextUI",
-	description: "Make beautiful websites regardless of your design experience.",
+	name: "Language Class",
+	description: "Practice cree language with modern web tools.",
 	navItems: [
 		{
 			label: "Home",
@@ -64,9 +64,9 @@ export const siteConfig = {
 		},
 	],
 	links: {
-		github: "https://github.com/nextui-org/nextui",
-		twitter: "https://twitter.com/getnextui",
-		docs: "https://nextui.org",
+		github: "https://github.com/Mid-Flight/language-class",
+		twitter: "https://twitter.com/midflightdev",
+		docs: "https://languageclass.ca/docs",
 		discord: "https://discord.gg/9b6yyZKmH4",
     sponsor: "https://patreon.com/jrgarciadev"
 	},
