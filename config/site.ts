@@ -8,26 +8,26 @@ export const siteConfig = {
 			label: "Home",
 			href: "/",
 		},
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Quiz",
-      href: "/quiz",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    }
+		{
+			label: "Docs",
+			href: "/docs",
+		},
+		{
+			label: "Quiz",
+			href: "/quiz",
+		},
+		{
+			label: "Typing",
+			href: "/typing",
+		},
+		{
+			label: "Blog",
+			href: "/blog",
+		},
+		{
+			label: "About",
+			href: "/about",
+		}
 	],
 	navMenuItems: [
 		{
@@ -68,6 +68,6 @@ export const siteConfig = {
 		twitter: "https://twitter.com/midflightdev",
 		docs: "https://languageclass.ca/docs",
 		discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev"
+		// sponsor: "https://patreon.com/jrgarciadev"
 	},
 };
