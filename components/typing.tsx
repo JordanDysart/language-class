@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 
@@ -52,17 +51,17 @@ const symbolMapping = {
 
 export const Typing = () => {
 
-	const [value2, symbol2, handleKeyPress2] = useTypingController2(symbolMapping);
+	const [value, symbol, handleKeyPress] = useTypingController2(symbolMapping);
 
 	return (
 		<div className="flex flex-row gap-3 my-unit-5 py-2">
 			<div className="flex flex-col gap-3 w-unit-9xl">
 				<div className="flex gap-3">
-					{`${symbol2}`}
+					{`${symbol?symbol:'\u1400'} `}
 				</div>
 				<Textarea
-					value={value2}
-					onKeyDown={handleKeyPress2}
+					value={value as string}
+					onKeyDown={handleKeyPress as any}
 					label="Description"
 					labelPlacement="outside"
 					placeholder="Enter your description"

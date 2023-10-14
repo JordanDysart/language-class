@@ -2,10 +2,10 @@ import {useState} from "react";
 
 const useTypingController2 = (symbolMapping:any) => {
 
-	const [value, setValue] = useState("");
-	const [symbol, setSymbol] = useState("");
+	const [value, setValue] = useState<string>("");
+	const [symbol, setSymbol] = useState<string>("");
 
-	const [firstKey, setFirstKey] = useState("");
+	const [firstKey, setFirstKey] = useState<string>("");
 
 	const handleKeyPress = (event: KeyboardEvent) => {
 		const { key } = event;
@@ -28,6 +28,7 @@ const useTypingController2 = (symbolMapping:any) => {
 		}
 			setFirstKey("");
 	};
+
 	const getSymbol = (firstKey: string, secondKey: string) => {
 		const firstIsConsonant = Object.keys(symbolMapping.consonants).includes(firstKey);
 		const firstIsVowel = Object.keys(symbolMapping.vowels).includes(firstKey);
