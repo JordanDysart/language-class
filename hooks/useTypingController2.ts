@@ -11,18 +11,24 @@ const useTypingController2 = (symbolMapping:any) => {
 		const { key } = event;
 		if (key === "Backspace") {
 			setValue(value.slice(0, -1));
+			setSymbol("");
 		} else if (key === "Enter") {
 			setValue("");
+			setSymbol("");
 		} else if (key === " ") {
 			setValue(value + " ");
+			setSymbol("");
 		} else if (key === "Tab") {
 			setValue(value + "\t");
+
+			setSymbol("");
 		} else if (key.length === 1 && firstKey === "") {
 			setFirstKey(key);
 			setSymbol(getSymbol(key, key));
 			return null;
 		} else if (key.length === 1 && firstKey !== "") {
 			const nextChar = getSymbol(firstKey, key)
+			setSymbol(nextChar);
 			setValue(value.slice(0, -1));
 			setValue(value + nextChar);
 		}
