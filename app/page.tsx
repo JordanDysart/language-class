@@ -7,7 +7,6 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 
-import { Quiz } from "@/components/quiz";
 import { Counter } from "@/components/counter";
 
 export default function Home() {
@@ -52,7 +51,9 @@ export default function Home() {
 					</span>
 				</Snippet>
 			</div>
-			<Quiz />
+
+
+			
 			<Counter />
 		</section>
 	);

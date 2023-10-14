@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Progress } from "@nextui-org/progress";
 
-const questions = [
+type Question = {
+	question: string;
+	answers: string[];
+	correctAnswer: string;
+};
+
+const questions: Question[] = [
 	{
 		question: "wapanohk",
 		answers: ["north", "east", "south", "west"],
@@ -37,39 +43,14 @@ export const Quiz = () => {
 	const [quizStarted, setQuizStarted] = useState(0);
 	const [quizFinished, setQuizFinished] = useState(0);
 
-	const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-	const [isCorrect, setIsCorrect] = useState(false);
-
 	const [questionIndex, setQuestionIndex] = useState(0);
+	const [currentQuestion, setCurrentQuestion] = useState(questions[questionIndex]);
 	const progress = (questionIndex / questions.length) * 100;
 	const quizDuration = quizFinished - quizStarted;
 	const quizDurationInSeconds = quizDuration / 1000;
 	const quizOver = questionIndex === questions.length;
-	const currentQuestion = questions[questionIndex];
 
 	const [score, setScore] = useState(0);
-
-	const handleAnswer = (answer: string) => {
-		setSelectedAnswer(answer);
-		setIsCorrect(answer === currentQuestion.correctAnswer);
-	};
-
-	useEffect(() => {
-		if (selectedAnswer !== null) {
-			if (questionIndex < questions.length) {
-
-
-				if (isCorrect == true) {
-					setScore((prev) => prev + 1);
-					setQuestionIndex((prev) => prev + 1);
-					setSelectedAnswer(null);
-				} else {
-					setQuestionIndex((prev) => prev + 1);
-					setSelectedAnswer(null);
-				}
-			}
-		}
-	}, [selectedAnswer, setQuestionIndex, setScore]);
 
 	useEffect(() => {
 		if (questionIndex == 1) {
@@ -78,24 +59,54 @@ export const Quiz = () => {
 		if (questionIndex === questions.length) {
 			setQuizFinished(Date.now());
 		}
-	}, [questionIndex, quizStarted, quizFinished, setQuizFinished, setQuizStarted]);
+	}, [questionIndex, setQuizFinished, setQuizStarted]);
+
+	const handleSubmittedAnswer = (isCorrect: boolean) => {
+		setScore((prev) => prev + (isCorrect ? 1 : 0));
+		setQuestionIndex((prev) => prev + 1);
+	}
 
 	return (quizOver ?
 		<>
-			
-			<div className="score-container mt-30 grid grid-cols-3 grid-rows-3 min-w-unit-24">
+			<div className="score-container mt-30 grid grid-cols-3 grid-rows-3 min-w-full">
 				{score} out of {questions.length} correct in {quizDurationInSeconds} seconds
-
 			</div>
-
 
 		</>
 		:
 		<>
-			<div className="question-container mt-30 grid grid-cols-3 grid-rows-3 min-w-unit-24">
-				<div className="question border-2 border-black py-10 text-lg m-5  min-w-unit-10 row-start-2 row-span-1 col-start-2 justify-center align-middle">{currentQuestion.question}</div>
+			<Question question={currentQuestion} onAnswer={handleSubmittedAnswer}/>
+			<div className="stats py-10 text-lg m-5  min-w-unit-10 row-start-4 row-span-1 col-start-1 col-span-3 flex flex-col justify-center align-middle">
+				{questionIndex + 1} of {questions.length} questions
+				<Progress label={'Quiz'} maxValue={questions.length} value={questionIndex} showValueLabel={true} className="max-w-md" />
+			</div>
+		</>
+	)
+}
+
+/**
+ * Question component
+ * take a question object and render it. Evaluate the input and display the correct answer
+ * when the user clicks on an answer, display the correct answer
+ */
+const Question = ({ question, onAnswer }: { question: Question, onAnswer: (isCorrect:boolean) => void}) => {
+
+	const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+	const [isCorrect, setIsCorrect] = useState(false);
+
+	const handleAnswer = (answer: string) => {
+		setSelectedAnswer(answer);
+		setIsCorrect(answer === question.correctAnswer);
+		onAnswer(isCorrect);
+	};
+
+
+	return (
+		<>
+			<div className="question-container grid grid-cols-3 grid-rows-4 min-w-full">
+				<Button className="question border-2 py-10 m-5  min-w-unit-10 row-start-2 row-span-1 col-start-2 justify-center align-middle">{question.question}</Button>
 				{
-					currentQuestion.answers.map((answer, index) => (
+					question.answers.map((answer, index) => (
 						<Answer
 							index={index}
 							key={answer}
@@ -106,16 +117,11 @@ export const Quiz = () => {
 						/>
 					))
 				}
-			</div >
-			<div className="score-container mt-30 grid grid-cols-3 grid-rows-3 min-w-unit-24">
-				{score}
 			</div>
-			<Progress value={progress} />
 		</>
-	)
 
+	);
 }
-
 
 type AnswerProps = {
 	answer: string;
@@ -135,13 +141,15 @@ const Answer = ({ answer, selectedAnswer, isCorrect, handleAnswer, index }: Answ
 
 	return (
 		<Button
-			className={`answer border-2 border-black px-10 py-10 m-5 transition-transform ease-in-out 
+			className={`answer px-10 py-10 m-5 transition-transform ease-in-out 
 			${columnStart} ${rowStart} 
-			${selectedAnswer === answer ? "selected" : ""} ${isCorrect && selectedAnswer === answer ? "correct" : ""
-				} ${!isCorrect && selectedAnswer === answer ? "wrong" : ""}`}
+			${selectedAnswer === answer ? "selected" : ""} 
+			${isCorrect && selectedAnswer === answer ? "correct" : ""} 
+			${!isCorrect && selectedAnswer === answer ? "wrong" : ""}`}
 			onClick={() => handleAnswer(answer)}
 		>
 			{answer}
 		</Button>
 	);
 }
+
