@@ -11,16 +11,16 @@ export default function PricingPage() {
 	return (
 		<div>
 			<h1 className={title()}>Typing</h1>
-			<Typing />
 			<div className="flex gap-3">
 				<Link
 					as={NextLink}
-					href={siteConfig.links.typing}
+					href={siteConfig.links.quiz}
 					className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}
 				>
 					Quiz Yourself	
 				</Link>
 			</div>
+			<Typing />
 		</div>
 	);
 }
