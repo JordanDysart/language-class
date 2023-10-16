@@ -12,7 +12,7 @@ import { useTypingController2 } from "../hooks";
  */
 const symbolMapping = {
 	consonantMaps: {
-		w: { a: '\u1417', e: '\u140C', i: '\u1403', o: '\u1412' },
+		w: { a: '\u1417', e: '\u140C', i: '\u140e', o: '\u1412' },
 		p: { a: '\u1438', e: '\u142F', i: '\u1431', o: '\u1433' },
 		t: { a: '\u1455', e: '\u144C', i: '\u144E', o: '\u1450' },
 		m: { a: '\u14AA', e: '\u14A3', i: '\u14A5', o: '\u14A7' },
@@ -43,7 +43,7 @@ const symbolMapping = {
 		e: '\u1401',
 		i: '\u1403',
 		o: '\u1405',
-		a: '\u140C',
+		a: '\u140a',
 	}
 };
 

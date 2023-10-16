@@ -66,7 +66,9 @@ export const siteConfig = {
 	links: {
 		github: "https://github.com/Mid-Flight/language-class",
 		twitter: "https://twitter.com/midflightdev",
-		docs: "https://languageclass.ca/docs",
+		tables: "/tables",
+		typing: "/typing",
+		quiz: "/quiz",
 		discord: "https://discord.gg/9b6yyZKmH4",
 		// sponsor: "https://patreon.com/jrgarciadev"
 	},
