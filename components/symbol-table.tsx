@@ -25,15 +25,20 @@ export const SymbolTable = ({symbols}:SymbolTableProps) => {
 		
 	return (
 		<>
-			<div className="flex flex-row gap-3 flex-wrap my-unit-5 py-2">
+			<div className="grid grid-cols-5 gap-3 my-unit-5 py-2">
 				
 			{
 				Object.values(symbols).map((symbol) => {
 					
 					return (
-						<div className="flex flex-col gap-3" key={symbol.description}>
-							<div className="flex gap-3">
-								{`symbol: ${symbol.symbol} `}
+						<div className="flex flex-row w-full gap-2 p-2 border-current border-1" key={symbol.description}>
+							<div className="flex gap-3 w-full justify-around">
+									<span>
+									{`${symbol.description}:  `}
+									</span>
+									<span>
+									{`${symbol.symbol} `}
+									</span>
 							</div>
 						</div>
 					)
